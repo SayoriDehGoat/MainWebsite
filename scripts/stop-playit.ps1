@@ -11,12 +11,12 @@ if (-not (Test-Path -LiteralPath $PidPath)) {
     exit 0
 }
 
-$pid = [int](Get-Content -Raw -LiteralPath $PidPath).Trim()
+$agentPid = [int](Get-Content -Raw -LiteralPath $PidPath).Trim()
 $resolvedExecutable = [System.IO.Path]::GetFullPath($Executable)
-$process = Get-CimInstance Win32_Process -Filter "ProcessId = $pid" -ErrorAction SilentlyContinue
+$process = Get-CimInstance Win32_Process -Filter "ProcessId = $agentPid" -ErrorAction SilentlyContinue
 if ($process -and $process.Name -ieq "playit.exe" -and $process.ExecutablePath -ieq $resolvedExecutable) {
-    Stop-Process -Id $pid -Force -ErrorAction SilentlyContinue
-    Write-Host "Stopped the playit agent started by this launcher (PID $pid)."
+    Stop-Process -Id $agentPid -Force -ErrorAction SilentlyContinue
+    Write-Host "Stopped the playit agent started by this launcher (PID $agentPid)."
 }
 
 Remove-Item -Force -ErrorAction SilentlyContinue $PidPath, $OwnershipPath
