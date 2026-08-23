@@ -1,0 +1,10 @@
+{
+  "status": "offline",
+  "javaAddress": "ireland-dis.gl.joinmc.link",
+  "bedrockAddress": "CONFIGURE-PLAYIT-UDP-ADDRESS",
+  "players": { "online": 0, "max": 0 },
+  "lastChecked": null,
+  "responseMs": null,
+  "version": "Paper 1.21.11 + Geyser",
+  "githubUrl": "#"
+}

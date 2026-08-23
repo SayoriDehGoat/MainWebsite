@@ -1,0 +1,31 @@
+# Minecraft runtime data (the entire runtime is local-only)
+server/*
+server/*.jar
+server/plugins/*.jar
+server/cache/
+server/logs/
+server/world/
+server/world_nether/
+server/world_the_end/
+server/usercache.json
+server/ops.json
+server/whitelist.json
+server/banned-ips.json
+server/banned-players.json
+server/eula.txt
+server/server.properties
+server/plugins/Geyser-Spigot/
+server/plugins/floodgate/
+server/plugins/ViaVersion/
+server/server.stdin
+server/server.pid
+
+# Local agent/config state
+playit/
+*.log
+*.lck
+.env
+
+# Windows noise
+Thumbs.db
+Desktop.ini

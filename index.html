@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f14">
+  <meta name="description" content="Live status and connection details for the Minecraft Java and Bedrock crossplay server.">
+  <meta property="og:title" content="Minecraft Crossplay Server">
+  <meta property="og:description" content="Live server status, Java connection details, and Bedrock connection details.">
+  <meta property="og:type" content="website">
+  <title>Minecraft Crossplay Server</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="./">Minecraft Crossplay</a>
+      <span class="version" id="version">Paper 1.21.11</span>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Community server</p>
+        <h1 id="page-title">Play together, Java or Bedrock.</h1>
+        <p class="lede">A cross-platform Minecraft server powered by Paper, Geyser, and Floodgate.</p>
+      </div>
+      <div class="status-panel" aria-live="polite">
+        <span class="status-dot" id="status-dot"></span>
+        <div>
+          <p class="status-label">Server status</p>
+          <strong id="status">Checking...</strong>
+          <p class="status-time" id="last-checked">Waiting for the latest check</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="connection-grid" aria-label="Connection details">
+      <article class="connection-card">
+        <div class="card-heading">
+          <span class="platform-icon java-icon">J</span>
+          <div>
+            <p class="card-kicker">Java Edition</p>
+            <h2>Connect from Java</h2>
+          </div>
+        </div>
+        <button class="copy-row" data-copy-target="java-address" title="Copy Java address">
+          <code id="java-address">Not configured</code>
+          <span class="copy-label">Copy</span>
+        </button>
+        <p class="card-note">Use this address in Multiplayer &rarr; Add Server.</p>
+      </article>
+
+      <article class="connection-card">
+        <div class="card-heading">
+          <span class="platform-icon bedrock-icon">B</span>
+          <div>
+            <p class="card-kicker">Bedrock Edition</p>
+            <h2>Connect from Bedrock</h2>
+          </div>
+        </div>
+        <button class="copy-row" data-copy-target="bedrock-address" title="Copy Bedrock address">
+          <code id="bedrock-address">Not configured</code>
+          <span class="copy-label">Copy</span>
+        </button>
+        <p class="card-note">Enter the address and port under Servers.</p>
+      </article>
+    </section>
+
+    <section class="info-band">
+      <div>
+        <p class="eyebrow">At a glance</p>
+        <h2>One world, two editions.</h2>
+      </div>
+      <dl class="stats">
+        <div><dt>Players online</dt><dd id="players">--</dd></div>
+        <div><dt>Last response</dt><dd id="response">--</dd></div>
+        <div><dt>Updated</dt><dd id="updated">--</dd></div>
+      </dl>
+    </section>
+
+    <footer>
+      <span id="footer-message">Status is refreshed automatically.</span>
+      <a id="github-link" href="#" rel="noreferrer">View on GitHub</a>
+    </footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

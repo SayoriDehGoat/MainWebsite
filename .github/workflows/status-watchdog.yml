@@ -1,0 +1,35 @@
+name: Minecraft server status
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out status site
+        uses: actions/checkout@v4
+
+      - name: Check Java server status
+        env:
+          MC_JAVA_ADDRESS: ${{ vars.MC_JAVA_ADDRESS || 'ireland-dis.gl.joinmc.link' }}
+          MC_BEDROCK_ADDRESS: ${{ vars.MC_BEDROCK_ADDRESS || 'CONFIGURE-PLAYIT-UDP-ADDRESS' }}
+          GITHUB_REPO_URL: ${{ vars.GITHUB_REPO_URL || format('https://github.com/{0}', github.repository) }}
+        run: node .github/scripts/check-minecraft-status.mjs
+
+      - name: Publish changed status
+        run: |
+          if git diff --quiet -- status.json; then
+            echo "Status did not change."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add status.json
+          git commit -m "Update Minecraft server status"
+          git push
