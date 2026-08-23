@@ -26,7 +26,7 @@ java -Xms2G -Xmx4G -jar "%PAPER_JAR%" --nogui
 set "SERVER_EXIT=%ERRORLEVEL%"
 cd /d "%~dp0"
 if defined PLAYIT_BEDROCK_PUBLIC_PORT (
-  powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\configure-geyser.ps1" -ConfigPath "%SERVER_DIR%\plugins\Geyser-Spigot\config.yml" -BedrockPort "%BEDROCK_PORT%" -BroadcastPort "%PLAYIT_BEDROCK_PUBLIC_PORT%"
+  powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\configure-geyser.ps1" -ConfigPath "%SERVER_DIR%\plugins\Geyser-Spigot\config.yml" -BedrockPort "%BEDROCK_PORT%" -BroadcastPort "%PLAYIT_BEDROCK_PUBLIC_PORT%" -UseHaproxyProtocol:%PLAYIT_BEDROCK_HAPROXY%
 ) else (
   powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\configure-geyser.ps1" -ConfigPath "%SERVER_DIR%\plugins\Geyser-Spigot\config.yml" -BedrockPort "%BEDROCK_PORT%"
 )
@@ -45,7 +45,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\stop-playit.ps1" -E
 exit /b 0
 
 :write_status
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$status = '%~1'; $path = Join-Path (Get-Location) 'status.json'; $data = [ordered]@{ status=$status; javaAddress=$env:PLAYIT_JAVA_ADDRESS; bedrockAddress=$env:PLAYIT_BEDROCK_ADDRESS; players=@{online=0;max=0}; lastChecked=(Get-Date).ToUniversalTime().ToString('o'); responseMs=$null; version='Paper 1.21.11 + Geyser'; githubUrl=$env:GITHUB_REPO_URL }; $json = $data | ConvertTo-Json -Depth 4; [IO.File]::WriteAllText($path, $json, (New-Object Text.UTF8Encoding($false)))"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$status = '%~1'; $path = Join-Path (Get-Location) 'status.json'; $data = [ordered]@{ status=$status; javaAddress=$env:PLAYIT_JAVA_ADDRESS; bedrockAddress=$env:PLAYIT_BEDROCK_ADDRESS; bedrockPort=$env:PLAYIT_BEDROCK_PUBLIC_PORT; players=@{online=0;max=0}; lastChecked=(Get-Date).ToUniversalTime().ToString('o'); responseMs=$null; version='Paper 1.21.11 + Geyser'; githubUrl=$env:GITHUB_REPO_URL }; $json = $data | ConvertTo-Json -Depth 4; [IO.File]::WriteAllText($path, $json, (New-Object Text.UTF8Encoding($false)))"
 if not "%GITHUB_REPO_URL%"=="https://github.com/REPLACE-ME/minecraft-server" (
   git add status.json >nul 2>&1
   git diff --cached --quiet status.json >nul 2>&1 || git commit -m "Server %~1" -- status.json >nul 2>&1

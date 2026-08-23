@@ -19,6 +19,9 @@ set "PLAYIT_JAVA_ADDRESS=ireland-dis.gl.joinmc.link"
 set "PLAYIT_BEDROCK_ADDRESS=drake-decor.tun.ply.gg"
 rem Optional: set this to the public UDP allocation port shown by playit.gg.
 set "PLAYIT_BEDROCK_PUBLIC_PORT=39433"
+rem Set to true only if the playit Bedrock tunnel has "Proxy Protocol Version 2" enabled.
+rem Leave false for a plain UDP tunnel (Geyser drops packets otherwise).
+set "PLAYIT_BEDROCK_HAPROXY=false"
 
 rem Set this to the HTTPS URL of the GitHub repository after creating it.
 set "GITHUB_REPO_URL=https://github.com/SayoriDehGoat/MainWebsite"

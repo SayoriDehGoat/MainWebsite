@@ -2,12 +2,20 @@ const FALLBACK_STATUS = {
   status: "unknown",
   javaAddress: "Not configured",
   bedrockAddress: "Not configured",
+  bedrockPort: "",
   players: { online: 0, max: 0 },
   lastChecked: null,
   responseMs: null,
   version: "Paper 1.21.11",
   githubUrl: "#"
 };
+
+function bedrockAddressWithPort(data) {
+  const address = data.bedrockAddress || FALLBACK_STATUS.bedrockAddress;
+  const port = data.bedrockPort || "";
+  if (!port || String(address).includes(":")) return address;
+  return `${address}:${port}`;
+}
 
 const $ = (id) => document.getElementById(id);
 
@@ -25,7 +33,7 @@ function renderStatus(data) {
   $("status-dot").className = `status-dot ${status}`;
   $("last-checked").textContent = formatTime(data.lastChecked);
   $("java-address").textContent = data.javaAddress || FALLBACK_STATUS.javaAddress;
-  $("bedrock-address").textContent = data.bedrockAddress || FALLBACK_STATUS.bedrockAddress;
+  $("bedrock-address").textContent = bedrockAddressWithPort(data);
   $("players").textContent = data.players && Number.isFinite(data.players.online) ? `${data.players.online}/${data.players.max ?? "?"}` : "--";
   $("response").textContent = Number.isFinite(data.responseMs) ? `${data.responseMs} ms` : "--";
   $("updated").textContent = data.lastChecked ? new Date(data.lastChecked).toLocaleTimeString() : "--";

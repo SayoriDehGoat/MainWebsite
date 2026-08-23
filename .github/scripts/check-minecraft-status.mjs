@@ -126,18 +126,23 @@ const current = JSON.parse(fs.readFileSync(path, "utf8"));
 const nextStatus = result.online ? "online" : "offline";
 const nextPlayers = result.players || { online: 0, max: 0 };
 const nextVersion = result.version || current.version;
-const nextBedrockAddress = process.env.MC_BEDROCK_ADDRESS || current.bedrockAddress;
+const bedrockOverride = process.env.MC_BEDROCK_ADDRESS || "";
+const bedrockSeparator = bedrockOverride.lastIndexOf(":") > bedrockOverride.indexOf("]") ? bedrockOverride.lastIndexOf(":") : -1;
+const nextBedrockAddress = bedrockSeparator > -1 ? bedrockOverride.slice(0, bedrockSeparator) : (bedrockOverride || current.bedrockAddress);
+const nextBedrockPort = bedrockSeparator > -1 ? bedrockOverride.slice(bedrockSeparator + 1) : (current.bedrockPort || "");
 const meaningfulChange = current.status !== nextStatus
   || current.players?.online !== nextPlayers.online
   || current.players?.max !== nextPlayers.max
   || current.version !== nextVersion
   || current.javaAddress !== address
-  || current.bedrockAddress !== nextBedrockAddress;
+  || current.bedrockAddress !== nextBedrockAddress
+  || current.bedrockPort !== nextBedrockPort;
 const next = {
   ...current,
   status: nextStatus,
   javaAddress: address,
   bedrockAddress: nextBedrockAddress,
+  bedrockPort: nextBedrockPort,
   players: nextPlayers,
   lastChecked: meaningfulChange ? new Date().toISOString() : current.lastChecked,
   responseMs: meaningfulChange ? result.responseMs : current.responseMs,

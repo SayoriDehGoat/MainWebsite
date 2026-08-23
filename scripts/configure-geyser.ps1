@@ -1,7 +1,8 @@
 param(
     [Parameter(Mandatory = $true)][string]$ConfigPath,
     [Parameter(Mandatory = $true)][int]$BedrockPort,
-    [int]$BroadcastPort = 0
+    [int]$BroadcastPort = 0,
+    [bool]$UseHaproxyProtocol = $false
 )
 
 if (-not (Test-Path -LiteralPath $ConfigPath)) {
@@ -61,7 +62,8 @@ foreach ($line in $lines) {
                 $newLine = $line -replace ':\s*\d+\s*$', ": $BroadcastPort"
             }
             elseif ($key -eq 'use-haproxy-protocol') {
-                $newLine = $line -replace ':\s*(true|false)\s*$', ': true'
+                $haproxyValue = if ($UseHaproxyProtocol) { 'true' } else { 'false' }
+                $newLine = $line -replace ':\s*(true|false)\s*$', ": $haproxyValue"
             }
         }
 
@@ -73,5 +75,5 @@ foreach ($line in $lines) {
 }
 
 [IO.File]::WriteAllLines($ConfigPath, $out, (New-Object Text.UTF8Encoding($false)))
-$haproxy = if ($BroadcastPort -gt 0) { 'true' } else { 'false' }
+$haproxy = if ($UseHaproxyProtocol) { 'true' } else { 'false' }
 Write-Host "Configured Geyser: auth-type=floodgate, Bedrock UDP port=$BedrockPort, broadcast-port=$BroadcastPort, use-haproxy-protocol=$haproxy."
