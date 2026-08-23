@@ -1,5 +1,5 @@
 {
-    "status":  "online",
+    "status":  "offline",
     "javaAddress":  "ireland-dis.gl.joinmc.link",
     "bedrockAddress":  "drake-decor.tun.ply.gg",
     "bedrockPort":  "39433",
@@ -7,7 +7,7 @@
                     "max":  0,
                     "online":  0
                 },
-    "lastChecked":  "2026-08-23T16:35:53.8903133Z",
+    "lastChecked":  "2026-08-23T16:46:45.2657505Z",
     "responseMs":  null,
     "version":  "Paper 1.21.11 + Geyser",
     "githubUrl":  "https://github.com/SayoriDehGoat/MainWebsite"
