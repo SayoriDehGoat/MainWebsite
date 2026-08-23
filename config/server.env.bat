@@ -16,9 +16,9 @@ rem Public addresses shown on the website.
 rem Java reuses the Wither Storm tunnel. Bedrock needs its own UDP tunnel in the playit.gg
 rem dashboard (local UDP 127.0.0.1:19132); put its public address here once created.
 set "PLAYIT_JAVA_ADDRESS=ireland-dis.gl.joinmc.link"
-set "PLAYIT_BEDROCK_ADDRESS=CONFIGURE-PLAYIT-UDP-ADDRESS"
+set "PLAYIT_BEDROCK_ADDRESS=drake-decor.tun.ply.gg"
 rem Optional: set this to the public UDP allocation port shown by playit.gg.
-set "PLAYIT_BEDROCK_PUBLIC_PORT="
+set "PLAYIT_BEDROCK_PUBLIC_PORT=39433"
 
 rem Set this to the HTTPS URL of the GitHub repository after creating it.
 set "GITHUB_REPO_URL=https://github.com/SayoriDehGoat/MainWebsite"
