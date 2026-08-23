@@ -1,14 +1,14 @@
 {
-  "status": "online",
+  "status": "offline",
   "javaAddress": "ireland-dis.gl.joinmc.link",
   "bedrockAddress": "CONFIGURE-PLAYIT-UDP-ADDRESS",
   "bedrockPort": "39433",
   "players": {
     "online": 0,
-    "max": 20
+    "max": 0
   },
-  "lastChecked": "2026-08-23T17:40:46.636Z",
-  "responseMs": 854,
+  "lastChecked": "2026-08-23T18:01:18.906Z",
+  "responseMs": null,
   "version": "Paper 1.21.11",
   "githubUrl": "https://github.com/SayoriDehGoat/MainWebsite"
 }
