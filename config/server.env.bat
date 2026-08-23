@@ -21,4 +21,4 @@ rem Optional: set this to the public UDP allocation port shown by playit.gg.
 set "PLAYIT_BEDROCK_PUBLIC_PORT="
 
 rem Set this to the HTTPS URL of the GitHub repository after creating it.
-set "GITHUB_REPO_URL=https://github.com/REPLACE-ME/minecraft-server"
+set "GITHUB_REPO_URL=https://github.com/SayoriDehGoat/MainWebsite"
